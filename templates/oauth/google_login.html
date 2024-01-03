@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="g_id_onload"
+     data-client_id="752390917744-afosaa0d4fahl0j3v7acs90ee3qst5e0.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+<div class="g_id_signin" data-type="standard"></div>
+
+<script>
+
+    function handleCredentialResponse(token) {
+        let splitResponse = token.credential.split(".");
+        let infos = JSON.parse(atob(splitResponse[1]));
+        let email = infos.email;
+
+        fetch('http://localhost:8000/api/v1/auth/google/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json;charset=UTF-8'},
+            body: JSON.stringify({
+                email: email,
+                token: token.credential,
+            })
+        })
+        .then(res => res.json())
+        .then(data => console.log('ID: ' + data.user_id + '\nToken: ' + data.access_token));
+    }
+</script>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</body>
+</html>
