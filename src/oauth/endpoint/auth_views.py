@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import AuthenticationFailed
 
-from oauth.services.google import check_google_auth
+from src.oauth.services.google import check_google_auth
 from src.oauth import serializers
 
 
