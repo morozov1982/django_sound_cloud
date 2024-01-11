@@ -3,7 +3,22 @@ from django.core.exceptions import ValidationError
 
 def get_path_upload_avatar(instance, filename):
     """Построение пути к файлу аватара, format: (media)/avatar/<user_id>/<filename>"""
-    return f"avatar/{instance.id}/{filename}"
+    return f"avatar/user_{instance.id}/{filename}"
+
+
+def get_path_upload_cover_album(instance, filename):
+    """Построение пути к файлу обложки альбома, format: (media)/album/<user_id>/<filename>"""
+    return f"album/user_{instance.id}/{filename}"
+
+
+def get_path_upload_track(instance, filename):
+    """Построение пути к треку, format: (media)/track/<user_id>/<filename>"""
+    return f"track/user_{instance.id}/{filename}"
+
+
+def get_path_upload_cover_playlist(instance, filename):
+    """Построение пути к обложке плейлиста, format: (media)/playlist/<user_id>/<filename>"""
+    return f"playlist/user_{instance.id}/{filename}"
 
 
 def validate_size_image(image):
